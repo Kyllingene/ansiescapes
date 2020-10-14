@@ -5,7 +5,11 @@ import os
 ESC = '\u001B['
 isTerminalApp = os.environ.get('TERM_PROGRAM') == 'Apple_Terminal'
 
-def _(s): return s.decode('unicode_escape');
+def _(s): 
+  if hasattr(s, "decode"):
+    return s.decode('unicode_escape')
+  else:
+    return s
 
 def cursorTo(x, y = None):
   if (not isinstance(x, numbers.Number)):
